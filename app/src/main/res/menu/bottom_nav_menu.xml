@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/baseline_home_24"
+        android:title="@string/homevector" />
+    <item
+        android:id="@+id/nav_products"
+        android:icon="@drawable/baseline_shopping_bag_24"
+        android:title="@string/productvector" />
+    <item
+        android:id="@+id/nav_cart"
+        android:icon="@drawable/baseline_add_shopping_cart_24"
+        android:title= "@string/shoppingcartvector" />
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/baseline_person_24"
+        android:title="@string/personvector" />
+</menu>

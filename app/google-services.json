@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "331299526916",
+    "project_id": "gear-house-49962",
+    "storage_bucket": "gear-house-49962.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331299526916:android:bff702da3026dd29241851",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCltus0pSL4Z1WKezRDkQEzPF5kzp2gOC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
