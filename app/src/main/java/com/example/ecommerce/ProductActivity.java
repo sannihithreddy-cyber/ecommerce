@@ -11,7 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.recyclerview.widget.GridLayoutManager;
 import android.content.Intent;
 import android.view.MenuItem;
 
@@ -45,12 +45,22 @@ public class ProductActivity extends AppCompatActivity {
 
         // Initialize RecyclerView
         recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2); // 2 columns
+        recyclerView.setLayoutManager(gridLayoutManager);
 
         // Initialize product list and adapter
         productList = new ArrayList<>();
-        adapter = new ProductAdapter(this, productList);
+        adapter = new ProductAdapter(this, productList, product -> {
+            // Handle product click
+            Intent intent = new Intent(ProductActivity.this, activity_product_detail.class);
+            intent.putExtra("product_name", product.getName());
+            intent.putExtra("product_price", "$" + product.getPrice());
+            intent.putExtra("product_description", product.getDescription());
+            intent.putExtra("product_image", product.getImg());
+            startActivity(intent);
+        });
         recyclerView.setAdapter(adapter);
+
 
         // Set window insets listener
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

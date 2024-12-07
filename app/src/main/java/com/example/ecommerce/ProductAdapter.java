@@ -13,17 +13,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+interface OnProductClickListener {
+    void onProductClick(Product product);
+}
+
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+    private OnProductClickListener listener;
 
     private Context context;
     private List<Product> productList;
 
     // Constructor
-    public ProductAdapter(Context context, List<Product> productList) {
+    public ProductAdapter(Context context, List<Product> productList, OnProductClickListener listener) {
         this.context = context;
         this.productList = productList;
+        this.listener = listener;
     }
+
 
     // ViewHolder class
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
@@ -47,21 +54,25 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return new ProductViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
-        // Get the product at the current position
         Product product = productList.get(position);
 
         // Bind data to the views
         holder.productName.setText(product.getName());
         holder.productDescription.setText(product.getDescription());
         holder.productPrice.setText("$" + product.getPrice());
+        Glide.with(context).load(product.getImg()).into(holder.productImage);
 
-        // Load the image using Glide
-        Glide.with(context)
-                .load(product.getImg())
-                .into(holder.productImage);
+        // Set click listener
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onProductClick(product);
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {
