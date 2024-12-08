@@ -17,17 +17,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class loginpage extends AppCompatActivity {
+
     // Fields for login
-    EditText loginEmail, loginPassword;
+    private EditText loginEmail, loginPassword;
 
     // Fields for sign-up
-    EditText signUpEmail, signUpPassword, confirmPassword, firstName, lastName;
+    private EditText signUpEmail, signUpPassword, confirmPassword, firstName, lastName;
 
     // Buttons
-    Button loginButton, signUpButton;
+    private Button loginButton, signUpButton;
 
     // Firebase Authentication
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,89 +54,102 @@ public class loginpage extends AppCompatActivity {
         signUpButton = findViewById(R.id.signupbutton);
 
         // Login button logic
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = loginEmail.getText().toString().trim();
-                String password = loginPassword.getText().toString().trim();
-
-                // Validate login input
-                if (email.isEmpty()) {
-                    loginEmail.setError("Enter email");
-                    return;
-                }
-                if (password.isEmpty()) {
-                    loginPassword.setError("Enter password");
-                    return;
-                }
-
-                // Log in with Firebase
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    Toast.makeText(loginpage.this, "Welcome back, " + user.getEmail(), Toast.LENGTH_SHORT).show();
-
-                                    // Redirect to homepage
-                                    Intent intent = new Intent(loginpage.this, homepage.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Toast.makeText(loginpage.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-            }
-        });
+        loginButton.setOnClickListener(view -> handleLogin());
 
         // Sign-up button logic
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = signUpEmail.getText().toString().trim();
-                String password = signUpPassword.getText().toString().trim();
-                String confirmPass = confirmPassword.getText().toString().trim();
+        signUpButton.setOnClickListener(view -> handleSignUp());
+    }
 
-                // Validate sign-up input
-                if (email.isEmpty()) {
-                    signUpEmail.setError("Enter email");
-                    return;
-                }
-                if (password.isEmpty()) {
-                    signUpPassword.setError("Enter password");
-                    return;
-                }
-                if (!password.equals(confirmPass)) {
-                    confirmPassword.setError("Passwords do not match");
-                    return;
-                }
+    private void handleLogin() {
+        String email = loginEmail.getText().toString().trim();
+        String password = loginPassword.getText().toString().trim();
 
-                // Optional: Validate other fields
-                if (firstName.getText().toString().trim().isEmpty()) {
-                    firstName.setError("Enter your first name");
-                    return;
-                }
-                if (lastName.getText().toString().trim().isEmpty()) {
-                    lastName.setError("Enter your last name");
-                    return;
-                }
+        // Validate login input
+        if (email.isEmpty()) {
+            loginEmail.setError("Enter email");
+            return;
+        }
+        if (password.isEmpty()) {
+            loginPassword.setError("Enter password");
+            return;
+        }
 
-                // Create user with Firebase
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    Toast.makeText(loginpage.this, "Sign-up successful. Welcome, " + user.getEmail(), Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(loginpage.this, "Sign-up failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-            }
-        });
+        // Log in with Firebase
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        Toast.makeText(loginpage.this, "Welcome back, " + user.getEmail(), Toast.LENGTH_SHORT).show();
+
+                        // Clear fields after successful login
+                        clearLoginFields();
+
+                        // Redirect to homepage
+                        Intent intent = new Intent(loginpage.this, homepage.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(loginpage.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void handleSignUp() {
+        String email = signUpEmail.getText().toString().trim();
+        String password = signUpPassword.getText().toString().trim();
+        String confirmPass = confirmPassword.getText().toString().trim();
+        String firstNameInput = firstName.getText().toString().trim();
+        String lastNameInput = lastName.getText().toString().trim();
+
+        // Validate sign-up input
+        if (email.isEmpty()) {
+            signUpEmail.setError("Enter email");
+            return;
+        }
+        if (password.isEmpty()) {
+            signUpPassword.setError("Enter password");
+            return;
+        }
+        if (!password.equals(confirmPass)) {
+            confirmPassword.setError("Passwords do not match");
+            return;
+        }
+        if (firstNameInput.isEmpty()) {
+            firstName.setError("Enter your first name");
+            return;
+        }
+        if (lastNameInput.isEmpty()) {
+            lastName.setError("Enter your last name");
+            return;
+        }
+
+        // Create user with Firebase
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        Toast.makeText(loginpage.this, "Sign-up successful. Welcome, " + user.getEmail(), Toast.LENGTH_SHORT).show();
+
+                        // Clear fields after successful sign-up
+                        clearSignUpFields();
+                    } else {
+                        Toast.makeText(loginpage.this, "Sign-up failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    // Clears login fields after a successful login
+    private void clearLoginFields() {
+        loginEmail.setText("");
+        loginPassword.setText("");
+    }
+
+    // Clears sign-up fields after a successful sign-up
+    private void clearSignUpFields() {
+        signUpEmail.setText("");
+        signUpPassword.setText("");
+        confirmPassword.setText("");
+        firstName.setText("");
+        lastName.setText("");
     }
 }

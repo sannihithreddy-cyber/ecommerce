@@ -57,6 +57,7 @@ public class ProductActivity extends AppCompatActivity {
             intent.putExtra("product_price", "$" + product.getPrice());
             intent.putExtra("product_description", product.getDescription());
             intent.putExtra("product_image", product.getImg());
+
             startActivity(intent);
         });
         recyclerView.setAdapter(adapter);

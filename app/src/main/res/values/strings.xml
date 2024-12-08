@@ -57,5 +57,7 @@
     <string name="add_symbol">+</string>
     <string name="default_quantity">1</string>
     <string name="subtract_symbol">-</string>
+    <string name="total_price">Total Price</string>
+    <string name="order_details">Order Details</string>
 
 </resources>

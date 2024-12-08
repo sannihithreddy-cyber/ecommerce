@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CheckoutActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Order Number -->
+            <TextView
+                android:id="@+id/order_number_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order Number: 123456"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Total Price -->
+            <TextView
+                android:id="@+id/total_price_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Price: $0.00"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Address Section Heading -->
+            <TextView
+                android:id="@+id/address_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Address Details"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Address Fields -->
+            <EditText
+                android:id="@+id/address_line1_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address Line 1"
+                android:inputType="textPostalAddress"
+                android:layout_marginBottom="12dp" />
+
+            <EditText
+                android:id="@+id/address_line2_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address Line 2 (Optional)"
+                android:inputType="textPostalAddress"
+                android:layout_marginBottom="12dp" />
+
+            <EditText
+                android:id="@+id/city_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="City"
+                android:inputType="text"
+                android:layout_marginBottom="12dp" />
+
+            <EditText
+                android:id="@+id/province_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Province/State"
+                android:inputType="text"
+                android:layout_marginBottom="12dp" />
+
+            <EditText
+                android:id="@+id/country_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Country"
+                android:inputType="text"
+                android:layout_marginBottom="12dp" />
+
+            <EditText
+                android:id="@+id/zipcode_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Postal/ZIP Code"
+                android:inputType="text"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Payment Section Heading -->
+            <TextView
+                android:id="@+id/payment_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Payment Details"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Payment Fields -->
+            <EditText
+                android:id="@+id/name_on_card_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name on Card"
+                android:inputType="textPersonName"
+                android:layout_marginBottom="12dp" />
+
+            <EditText
+                android:id="@+id/card_number_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Card Number"
+                android:inputType="number"
+                android:layout_marginBottom="12dp" />
+
+            <EditText
+                android:id="@+id/expiry_date_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Expiry Date (MM/YY)"
+                android:inputType="date"
+                android:layout_marginBottom="12dp" />
+
+            <EditText
+                android:id="@+id/cvv_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="CVV"
+                android:inputType="numberPassword"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Additional Notes Field -->
+            <EditText
+                android:id="@+id/additional_notes_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Additional Notes (Optional)"
+                android:inputType="textMultiLine"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Place Order Button -->
+            <Button
+                android:id="@+id/place_order_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Place Order"
+                android:backgroundTint="@color/common_google_signin_btn_text_dark_focused"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
