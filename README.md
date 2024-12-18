@@ -1,4 +1,7 @@
-***code is in the master branch**
+***code is in the master branch***
+
+
+
 E-Commerce Android Application
 Overview
 This project is a feature-rich, modular eCommerce Android application built to provide a seamless shopping experience for users. The app allows users to browse products, add items to their cart, manage their orders, and more, with a clean and responsive design for both portrait and landscape modes.
